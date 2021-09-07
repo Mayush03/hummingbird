@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "hummingbird",
+    "slug": "hummingbird",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "hummingbird"
+}
