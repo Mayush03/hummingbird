@@ -3,6 +3,14 @@
     "name": "hummingbird",
     "slug": "hummingbird",
     "version": "1.0.0",
+    "orientation": "portrait", 
+    "android":{"softwareKeyboardLayoutMode": "pan"},
+    "icon": "./assets/app_images/logo2.png",
+    "splash": {
+      "image": "./assets/app_images/splashmain.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]

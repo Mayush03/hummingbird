@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "596739538910",
+    "project_id": "hummingbird-1631078890567",
+    "storage_bucket": "hummingbird-1631078890567.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596739538910:android:106aeb60e7129b7aaf674f",
+        "android_client_info": {
+          "package_name": "com.hummingbird"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596739538910-oeh4qunhdn91v5jdr19aali9talgveot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hummingbird",
+            "certificate_hash": "62025a56ca9ef9a85f625891bbee31ba775018b6"
+          }
+        },
+        {
+          "client_id": "596739538910-vdgev9a3ed58ibuasq29fets2iodmmgs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzIvJY_sXbe7BnzMcwpxD9Fr7Wtcidni8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596739538910-vdgev9a3ed58ibuasq29fets2iodmmgs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
