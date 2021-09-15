@@ -105,7 +105,7 @@ export function SignupScreen({ navigation }) {
       </TouchableRipple>
 
       <Text style={styles.legalText}>
-          By login you agree to our &nbsp;
+          By login you agree to our&nbsp;
           <TouchableWithoutFeedback onPress={()=> Linking.openURL('https://reactnativecode.com')}>
             <Text style={styles.trmText}>terms of services </Text>
           </TouchableWithoutFeedback>
@@ -113,6 +113,13 @@ export function SignupScreen({ navigation }) {
           <TouchableWithoutFeedback onPress={()=> Linking.openURL('https://reactnativecode.com')}>
           <Text style={styles.trmText}>privacy policy.</Text>
       </TouchableWithoutFeedback>
+        </Text>
+
+        <Text style={styles.signupButton}>
+          New here?&nbsp;
+          <TouchableWithoutFeedback onPress={()=> navigation.navigate("Signup")}>
+            <Text style={styles.trmText}>create your account </Text>
+          </TouchableWithoutFeedback>
         </Text>
 
      </View>
@@ -207,7 +214,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: "30%",
     marginBottom:0,
-  }
+  },
+  signupButton: {
+    marginTop: 20,
+    fontWeight: "normal",
+    color: colors.black,
+    fontSize: 14,
+    width: "90%",
+    textAlign: "center",
+  },
 });
 
 export default SignupScreen;
