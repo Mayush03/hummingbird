@@ -1,11 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function App() {
+function HomeScreen({ route }) {
+
+  const email = route.params;
+  const emailobj = route.params.email;
+  const [model, setModel] = useState({});
+
+  useEffect(() =>{
+    const getUserData = async () => {
+       try {
+        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${emailobj}`);
+        setModel(response.data);
+        console.log(response.data)
+        const token = await AsyncStorage.setItem('cookie', emailobj)
+        const tokenData = await AsyncStorage.getItem('cookie')
+       }catch(err){
+       console.log(err);
+       }
+    };
+    getUserData()
+    }, [emailobj]);
 
   let [fontsLoaded] = useFonts({ Righteous_400Regular });
 
@@ -17,6 +38,7 @@ export default function App() {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.logoContainer}>
         <Text>Home Screen</Text>
+        {/* <Text>Hi, {model[0].fullname}</Text> */}
       </View>
       <View style={styles.buttonContainer} >
         <Text>Button Container</Text>
@@ -68,3 +90,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkgray
   }
 });
+
+export default HomeScreen;

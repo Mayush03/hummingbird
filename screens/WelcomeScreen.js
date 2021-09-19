@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
 import { TouchableRipple } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App({ navigation }) {
+
+  
+  useEffect(() =>{
+    const getcookietoken = async () => {
+       try {
+        const tokenData = await AsyncStorage.getItem('cookie')
+        if(tokenData){
+          //alert(tokenData)
+          //await AsyncStorage.removeItem(tokenData);
+          navigation.navigate("Home", { email: tokenData } );
+        }
+        else{
+         //alert("No token")
+         navigation.navigate("Welcome")
+        }
+       }catch(err){
+       console.log(err);
+       }
+    };
+    getcookietoken()
+    }, []);
 
   let [fontsLoaded] = useFonts({ Righteous_400Regular });
 

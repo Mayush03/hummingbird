@@ -68,7 +68,7 @@ export function LoginPasscodeScreen({ navigation, route }) {
         setvisiblePasscodeMatch(true)
       }
        if(response.data == "Passcode is blank"){
-        setvisibleToastPasscode(true);
+        setvisibleToastPasscode(true)
       }
      }).catch((error)=>{
        console.log(error);
