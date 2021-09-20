@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
+//import BottomTabs from '../bottomTabs/bottomTabs';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
 import axios from 'axios';
@@ -9,8 +10,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function HomeScreen({ route }) {
 
-  const email = route.params;
+  //const email = route.params;
   const emailobj = route.params.email;
+  console.log(emailobj)
   const [model, setModel] = useState({});
 
   useEffect(() =>{
@@ -42,6 +44,7 @@ function HomeScreen({ route }) {
       </View>
       <View style={styles.buttonContainer} >
         <Text>Button Container</Text>
+        {/* <BottomTabs/> */}
       </View>
     </SafeAreaView>
   );
