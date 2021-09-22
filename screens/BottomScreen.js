@@ -51,6 +51,7 @@ function UserpassScreen({ route }) {
        //initialRouteName="Home"
        screenOptions={{
          tabBarShowLabel: false,
+         headerShown: false,
          tabBarStyle: {
            position: 'absolute',
            bottom: 30,
