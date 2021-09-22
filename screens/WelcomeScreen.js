@@ -17,7 +17,7 @@ export default function App({ navigation }) {
         if(tokenData){
           //alert(tokenData)
           //await AsyncStorage.removeItem(tokenData);
-          navigation.navigate("Home", { email: tokenData } );
+          navigation.navigate("BottomScreen", { email: tokenData } );
         }
         else{
          //alert("No token")

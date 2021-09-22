@@ -7,7 +7,7 @@ import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function HomeScreen({ route }) {
+function SettingsScreen({ route }) {
 
   //const email = route.params;
   const emailobj = route.params.email;
@@ -37,7 +37,7 @@ function HomeScreen({ route }) {
     <SafeAreaView style={styles.container}>
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
-        <Text>Home Screen</Text>
+        <Text>Settings Screen</Text>
         {/* <Text>Hi, {model[0].fullname}</Text> */}
       </View>
 
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+export default SettingsScreen;
