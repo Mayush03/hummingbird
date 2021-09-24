@@ -19,8 +19,9 @@ const Tab = createBottomTabNavigator();
 
 function UserpassScreen({ route }) {
 
-  //const email = route.params;
+  const email = route.params;
   const emailobj = route.params.email;
+  console.log("bottomscreen emailobj: " + emailobj)
   const [model, setModel] = useState({});
 
   useEffect(() =>{
@@ -31,6 +32,7 @@ function UserpassScreen({ route }) {
         console.log(response.data)
         const token = await AsyncStorage.setItem('cookie', emailobj)
         const tokenData = await AsyncStorage.getItem('cookie')
+        console.log("tokenData: " + tokenData)
        }catch(err){
        console.log(err);
        }
@@ -144,13 +146,13 @@ function UserpassScreen({ route }) {
          <Tab.Screen name="Profile" component={ProfileScreen} initialParams={{ emailobj }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{position: 'absolute', top: 20, left:15, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{position: 'absolute', top: 19, left:19, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
               <Image 
               source={require("../assets/app_images/profile.png")}
               resizeMode="contain"
               style={{
-                width:25,
-                height:25,
+                width:27,
+                height:27,
                 position: 'absolute', 
                 top: 0, 
                 left: 0, 
@@ -168,7 +170,7 @@ function UserpassScreen({ route }) {
 <Tab.Screen name="Settings" component={SettingsScreen} initialParams={{ emailobj }}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{position: 'absolute', top: 20, left:14, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{position: 'absolute', top: 20, left:17, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
               <Image 
               source={require("../assets/app_images/settings.png")}
               resizeMode="contain"

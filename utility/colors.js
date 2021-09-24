@@ -14,5 +14,6 @@ export default {
     shadow: "#F4F6F6",
     blackdisable: "rgb(105,105,105)",
     brightred: "#E74C3C",
+    lightred: "#F9EBEA",
     orange: "#F35431"
 }

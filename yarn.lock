@@ -1152,6 +1152,11 @@
   resolved "https://registry.npmjs.org/@expo-google-fonts/righteous/-/righteous-0.2.0.tgz"
   integrity sha512-fZXVTfVutI0LGYWh/4s0Nu0HfrQnuOJYs11I38UU8Vn9yCFLzpREhJE/m3rF7CPC5iFg2eSRGJ9aj5X9cPjY5g==
 
+"@expo-google-fonts/source-sans-pro@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/@expo-google-fonts/source-sans-pro/-/source-sans-pro-0.2.0.tgz"
+  integrity sha512-V+QMWNjX5gnvnw4JZkW0XbKC4IjWnxUv1Qw7sxuZXpWlOSjU2MmdTKLO+ibGvaX4xAvso5o9rKAYouCroxqrIw==
+
 "@expo/config-plugins@2.0.4":
   version "2.0.4"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-2.0.4.tgz"
@@ -1469,7 +1474,7 @@
 
 "@react-native-async-storage/async-storage@^1.15.8":
   version "1.15.8"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.15.8.tgz#c2263646b7261803125b555cf1bbd48b72dedafc"
+  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.15.8.tgz"
   integrity sha512-SIpsnmUt2Af8f/In7wu/HMeIiWBx9+T14GL4VrwtZv8+RceMejPtOwRMP8kc6xifkgg0gxwwHJ5+pEG/cEt1Mw==
   dependencies:
     merge-options "^3.0.4"
@@ -1596,7 +1601,7 @@
 
 "@react-navigation/bottom-tabs@^6.0.5":
   version "6.0.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.5.tgz#ece601449054bf555d4f5b2cc00f7a20eb6f557a"
+  resolved "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.5.tgz"
   integrity sha512-GytjJUzacHhe3C24HFrPl881Donrw2m+3JBNqMJALxMRjSA8yY72+l16bZR9YFsrywSHVSbjxIfzqtGb8rIVJg==
   dependencies:
     "@react-navigation/elements" "^1.1.0"
@@ -3652,7 +3657,7 @@ is-obj@^1.0.0:
 
 is-plain-obj@^2.1.0:
   version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-2.1.0.tgz#45e42e37fccf1f40da8e5f76ee21515840c09287"
+  resolved "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-2.1.0.tgz"
   integrity sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==
 
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
@@ -4102,7 +4107,7 @@ md5-file@^3.2.3:
 
 merge-options@^3.0.4:
   version "3.0.4"
-  resolved "https://registry.yarnpkg.com/merge-options/-/merge-options-3.0.4.tgz#84709c2aa2a4b24c1981f66c179fe5565cc6dbb7"
+  resolved "https://registry.npmjs.org/merge-options/-/merge-options-3.0.4.tgz"
   integrity sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==
   dependencies:
     is-plain-obj "^2.1.0"
@@ -4997,6 +5002,13 @@ react-mysql@^0.0.1:
     object-assign "^4.1.1"
     scheduler "^0.11.0"
 
+react-native-awesome-alerts@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.npmjs.org/react-native-awesome-alerts/-/react-native-awesome-alerts-1.5.2.tgz"
+  integrity sha512-PPTzKLpwDKbjeghvrRkg7OunND4C7d4bQORVLBnhqUK2z2PfZiI3UCULU0tczzeOyavv5hVSrYNXKPXlvhfmVg==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-gesture-handler@~1.10.2:
   version "1.10.3"
   resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-1.10.3.tgz"
@@ -5036,6 +5048,11 @@ react-native-reanimated@~2.2.0:
     fbjs "^3.0.0"
     mockdate "^3.0.2"
     string-hash-64 "^1.0.3"
+
+react-native-restart@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/react-native-restart/-/react-native-restart-0.0.22.tgz#81fcb7f31e35951d85410c68b9556acf3ab88705"
+  integrity sha512-XwCqAMAKsO8yCM3xACPFKvkDQZe41lcavOuO0gUEu803IuTLtciualCq/qs83ryRDCDh1jkXYRqFjsGjLMCN3Q==
 
 react-native-safe-area-context@3.2.0:
   version "3.2.0"

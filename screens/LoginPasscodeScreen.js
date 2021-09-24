@@ -48,6 +48,8 @@ export function LoginPasscodeScreen({ navigation, route }) {
   const [passcode,setPasscode] = useState("");
   const [isSubmit, setIsSubmit] = useState(false); 
 
+  console.log("Login passcode emailobj: " + emailobj)
+
   const passcodeHandler = (text) =>{
     setPasscode(text);
   }
