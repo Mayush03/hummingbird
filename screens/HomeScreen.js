@@ -45,7 +45,11 @@ function HomeScreen({}) {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
         <Text>Home Screen</Text>
-        {!!model && model.map((item) => (<Text>{item.fullname}</Text>))}
+        {!!model && model.map((item, uqid) => (
+        <View key={uqid}>
+        <Text>{item.fullname}</Text>
+        </View>
+        ))}
       </View>
     </SafeAreaView>
   );
