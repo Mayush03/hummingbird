@@ -7,26 +7,33 @@ import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function HomeScreen({ route }) {
+function HomeScreen({}) {
 
-  //const email = route.params;
-  const emailobj = route.params.email;
-  const [model, setModel] = useState({});
+  // const email = route.params;
+  // const emailobj = route.params.email;
+
+  //const tokenData = ({});
+
+  const [model, setModel] = useState([]);
+  //console.log(emailobj)
 
   useEffect(() =>{
     const getUserData = async () => {
        try {
-        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${emailobj}`);
-        setModel(response.data);
-        console.log(response.data)
-        const token = await AsyncStorage.setItem('cookie', emailobj)
+        //Saving cookies...
         const tokenData = await AsyncStorage.getItem('cookie')
+        console.log("HomeScreen tokenData: " + tokenData) 
+        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${tokenData}`);
+        setModel(response.data);
+        console.log("HomeScreen response data: ")
+        console.log(response.data)
        }catch(err){
-       console.log(err);
+         
+       console.log("HomeScreen: " + err);
        }
     };
     getUserData()
-    }, [emailobj]);
+    }, []);
 
   let [fontsLoaded] = useFonts({ Righteous_400Regular });
 
@@ -38,9 +45,8 @@ function HomeScreen({ route }) {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
         <Text>Home Screen</Text>
-        {/* <Text>Hi, {model[0].fullname}</Text> */}
+        {!!model && model.map((item) => (<Text>{item.fullname}</Text>))}
       </View>
-
     </SafeAreaView>
   );
   }

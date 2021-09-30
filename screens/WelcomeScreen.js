@@ -15,12 +15,12 @@ export default function App({ navigation }) {
        try {
         const tokenData = await AsyncStorage.getItem('cookie')
         if(tokenData){
-          //alert(tokenData)
+          alert(tokenData)
           //await AsyncStorage.removeItem(tokenData);
           navigation.navigate("BottomScreen", { email: tokenData } );
         }
         else{
-         //alert("No token")
+         alert("No token")
          navigation.navigate("Welcome")
         }
        }catch(err){

@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
@@ -17,24 +17,26 @@ import SettingsScreen from './SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
-function UserpassScreen({ route }) {
+function BottomScreen({ route }) {
 
   const email = route.params;
   const emailobj = route.params.email;
-  console.log("bottomscreen emailobj: " + emailobj)
   const [model, setModel] = useState({});
 
   useEffect(() =>{
     const getUserData = async () => {
        try {
-        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${emailobj}`);
-        setModel(response.data);
-        console.log(response.data)
+        //Saving cookies...
         const token = await AsyncStorage.setItem('cookie', emailobj)
         const tokenData = await AsyncStorage.getItem('cookie')
-        console.log("tokenData: " + tokenData)
+        //console.log("BottomScreen tokenData: " + tokenData) 
+        const response = await axios(`http://192.168.1.7/hummingbird/bottomScreen.php?email=${emailobj}`);
+        setModel(response.data);
+        // console.log("BottomScreen response data: ")
+        // console.log(response.data)
        }catch(err){
-       console.log(err);
+         
+       console.log("BottomScreen: " + err);
        }
     };
     getUserData()
@@ -50,7 +52,7 @@ function UserpassScreen({ route }) {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
       <Tab.Navigator 
-       //initialRouteName="Home"
+       initialRouteName="Home"
        screenOptions={{
          tabBarShowLabel: false,
          headerShown: false,
@@ -69,7 +71,7 @@ function UserpassScreen({ route }) {
        }}
        >
 
-       <Tab.Screen name="Home" component={HomeScreen} initialParams={{ emailobj }}
+       <Tab.Screen name="Home" component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{position: 'absolute', top: 20, left:20, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
@@ -93,7 +95,7 @@ function UserpassScreen({ route }) {
           ),
         }}   />
 
-       <Tab.Screen name="Search" component={SearchScreen} initialParams={{ emailobj }}
+       <Tab.Screen name="Search" component={SearchScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{position: 'absolute', top: 20, left:17, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
@@ -118,7 +120,7 @@ function UserpassScreen({ route }) {
         }}   />
 
 
-     <Tab.Screen name="Shelf" component={ShelfScreen} initialParams={{ emailobj }}
+     <Tab.Screen name="Shelf" component={ShelfScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{position: 'absolute', top: 14, left:11, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
@@ -143,7 +145,7 @@ function UserpassScreen({ route }) {
         }}   />
 
 
-         <Tab.Screen name="Profile" component={ProfileScreen} initialParams={{ emailobj }}
+         <Tab.Screen name="Profile" component={ProfileScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{position: 'absolute', top: 19, left:19, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
@@ -167,7 +169,7 @@ function UserpassScreen({ route }) {
           ),
         }}   />
 
-<Tab.Screen name="Settings" component={SettingsScreen} initialParams={{ emailobj }}
+<Tab.Screen name="Settings" component={SettingsScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{position: 'absolute', top: 20, left:17, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
@@ -252,4 +254,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default UserpassScreen;
+export default BottomScreen;

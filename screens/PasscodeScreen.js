@@ -62,7 +62,7 @@ export function PasscodeScreen({ navigation, route }) {
        setIsSubmit(false);
        //Navigate user to home after valid register
        if(response.data == "OK"){
-         navigation.navigate("Home", { email: email } );
+         navigation.navigate("BottomScreen", { email: emailobj } );
        }
        if(response.data == "Passcode do not match"){
         setvisiblePasscodeMatch(true)

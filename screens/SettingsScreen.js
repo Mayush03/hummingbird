@@ -30,6 +30,8 @@ function SettingsScreen({ navigation, route }) {
 
 //Logout function
 const Logout = async() => {
+  // const tokenData = await AsyncStorage.getItem('cookie')
+  // let deleteCookie = await AsyncStorage.removeItem(tokenData)
   let deleteCookie = AsyncStorage.clear();
   if(deleteCookie){
     console.log("Logging out...")
@@ -41,23 +43,23 @@ const Logout = async() => {
 
 
   //const email = route.params;
-  const emailobj = route.params.email;
+  //const emailobj = route.params.email;
   const [model, setModel] = useState({});
 
   useEffect(() =>{
     const getUserData = async () => {
        try {
-        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${emailobj}`);
+        const tokenData = await AsyncStorage.getItem('cookie') 
+        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${tokenData}`);
         setModel(response.data);
         console.log(response.data)
-        const token = await AsyncStorage.setItem('cookie', emailobj)
-        const tokenData = await AsyncStorage.getItem('cookie')
        }catch(err){
+        console.log("<<<SettingsScreen>>>")
        console.log(err);
        }
     };
     getUserData()
-    }, [emailobj]);
+    }, []);
 
   let [fontsLoaded] = useFonts({ SourceSansPro_400Regular });
 
