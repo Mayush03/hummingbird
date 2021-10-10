@@ -1,13 +1,34 @@
-import React from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
+import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function ProfileScreen() {
+function ProfileScreen({}) {
 
-  let [fontsLoaded] = useFonts({ Righteous_400Regular });
+  const [model, setModel] = useState([]);
+
+  useEffect(() =>{
+    const getUserData = async () => {
+       try {
+        //Saving cookies...
+        const tokenData = await AsyncStorage.getItem('cookie')
+        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${tokenData}`);
+        setModel(response.data);
+        console.log("ProfileScreen response data: ")
+        console.log(response.data)
+       }catch(err){
+         
+       console.log("ProfileScreen: " + err);
+       }
+    };
+    getUserData()
+    }, []);
+
+    let [fontsLoaded] = useFonts({ SourceSansPro_400Regular });
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -15,11 +36,12 @@ function ProfileScreen() {
   return (
     <SafeAreaView style={styles.container}>
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
-      <View style={styles.logoContainer}>
-        <Text>Logo container</Text>
-      </View>
-      <View style={styles.buttonContainer} >
-        <Text>Button Container</Text>
+      <View style={styles.mainContainer}>
+        {!!model && model.map((item, uqid) => (
+        <View key={uqid}>
+        <Text style={styles.hText}>Hi, {item.fullname}</Text>
+        </View>
+        ))}
       </View>
     </SafeAreaView>
   );
@@ -38,35 +60,32 @@ const styles = StyleSheet.create({
   statusBar: {
     height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
   },
-  logoContainer: {
+  mainContainer: {
     flex: 1,
     width: 100,
     height: 100,
     minWidth: '100%',
-    minHeight: '80%',
+    minHeight: '100%',
     maxWidth: '100%',
-    maxHeight: '80%',
-    backgroundColor: colors.red
+    maxHeight: '100%',
+    backgroundColor: colors.gray
   },
-  appLogo: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
+  shadow:{
+    shadowColor: colors.shadow,
+    shadowOffset: {
+      width:0,
+      height:10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
-  logotext: {
-    color: colors.orange,
-    fontFamily: 'Righteous_400Regular',
-    fontSize: 25,
-    textAlign: "center"
-  },
-  buttonContainer: {
-    flex: 1,
-    width: 100,
-    height: 100,
-    minWidth: '100%',
-    backgroundColor: colors.darkgray
-  }
+  hText: {
+    fontFamily: "SourceSansPro_400Regular", 
+      fontSize: 30, 
+      padding: 8,
+      fontWeight: "bold",
+  } 
 });
 
 export default ProfileScreen;

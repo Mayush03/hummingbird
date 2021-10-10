@@ -1,41 +1,40 @@
 import React, { useState, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView, StatusBar, Platform } from 'react-native';
+import { SafeAreaView, StatusBar, Platform, FlatList } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
+import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+
 
 function HomeScreen({}) {
 
   // const email = route.params;
   // const emailobj = route.params.email;
 
-  //const tokenData = ({});
-
-  const [model, setModel] = useState([]);
-  //console.log(emailobj)
-
+  const [story, setStory] = useState([]);
+  
   useEffect(() =>{
-    const getUserData = async () => {
+    const getAllStories = async () => {
        try {
         //Saving cookies...
         const tokenData = await AsyncStorage.getItem('cookie')
-        console.log("HomeScreen tokenData: " + tokenData) 
-        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${tokenData}`);
-        setModel(response.data);
+        const response = await axios(`http://192.168.1.7/hummingbird/allStories.php`);
+        setStory(response.data);
         console.log("HomeScreen response data: ")
         console.log(response.data)
        }catch(err){
          
-       console.log("HomeScreen: " + err);
+       console.log("HomeScreen Err: " + err);
        }
     };
-    getUserData()
-    }, []);
+    getAllStories()
+    },[]);
 
-  let [fontsLoaded] = useFonts({ Righteous_400Regular });
+
+    let [fontsLoaded] = useFonts({ SourceSansPro_400Regular });
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -44,12 +43,18 @@ function HomeScreen({}) {
     <SafeAreaView style={styles.container}>
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
-        <Text>Home Screen</Text>
-        {!!model && model.map((item, uqid) => (
-        <View key={uqid}>
-        <Text>{item.fullname}</Text>
+        <Text style={styles.screenName}>Home</Text>
+        {!!story && story.map((item, sid) => (
+        <View key={sid}>
+        <Card>
+          <Card.Content>
+            <Title>{item.story_title}</Title>
+            </Card.Content>
+              <Card.Cover source={{ uri: `${item.story_image}` }} />
+        </Card>
         </View>
         ))}
+        {/* <Text>{story.length > 0 && story}</Text> */}
       </View>
     </SafeAreaView>
   );
@@ -76,19 +81,7 @@ const styles = StyleSheet.create({
     minHeight: '100%',
     maxWidth: '100%',
     maxHeight: '100%',
-    backgroundColor: colors.gray
-  },
-  appLogo: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
-  },
-  logotext: {
-    color: colors.orange,
-    fontFamily: 'Righteous_400Regular',
-    fontSize: 25,
-    textAlign: "center"
+    backgroundColor: colors.white
   },
   buttonContainer: {
     flex: 1,
@@ -106,6 +99,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  screenName:{
+    padding:6,
+    fontFamily: "SourceSansPro_400Regular", 
+    fontSize:28,
+    fontWeight: "bold",
   }
 });
 

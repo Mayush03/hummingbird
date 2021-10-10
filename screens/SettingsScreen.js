@@ -44,7 +44,7 @@ const Logout = async() => {
 
   //const email = route.params;
   //const emailobj = route.params.email;
-  const [model, setModel] = useState({});
+  const [model, setModel] = useState([]);
 
   useEffect(() =>{
     const getUserData = async () => {
