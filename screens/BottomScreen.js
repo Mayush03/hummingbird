@@ -50,6 +50,7 @@ function BottomScreen({ route }) {
   return (
     <SafeAreaView style={styles.container}>
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
+
       <View style={styles.mainContainer}>
       <Tab.Navigator 
        initialRouteName="Home"
@@ -63,6 +64,8 @@ function BottomScreen({ route }) {
            right: 20,
            elevation: 0,
            backgroundColor: colors.black,
+           borderWidth: 1,
+           borderColor: colors.black,
            borderRadius: 16,
            minHeight: 66,
            maxHeight: 66,
@@ -195,7 +198,7 @@ function BottomScreen({ route }) {
 
       </Tab.Navigator>
       </View>
-
+      
     </SafeAreaView>
   );
   }

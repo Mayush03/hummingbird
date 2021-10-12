@@ -7,7 +7,7 @@ import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sa
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-
+import { ScrollView } from 'react-native-gesture-handler';
 
 function HomeScreen({}) {
 
@@ -33,7 +33,6 @@ function HomeScreen({}) {
     getAllStories()
     },[]);
 
-
     let [fontsLoaded] = useFonts({ SourceSansPro_400Regular });
 
   if (!fontsLoaded) {
@@ -44,17 +43,37 @@ function HomeScreen({}) {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
         <Text style={styles.screenName}>Home</Text>
-        {!!story && story.map((item, sid) => (
+        {/* {!!story && story.map((item, sid) => (
         <View key={sid}>
+        
         <Card>
           <Card.Content>
             <Title>{item.story_title}</Title>
             </Card.Content>
               <Card.Cover source={{ uri: `${item.story_image}` }} />
         </Card>
+       
         </View>
-        ))}
+        ))} */}
         {/* <Text>{story.length > 0 && story}</Text> */}
+
+        <FlatList
+        data={ story }
+        renderItem={({item}) => 
+        
+        <Card>
+        <Card.Content>
+          <Title>{item.story_title}</Title>
+          </Card.Content>
+            <Card.Cover source={{ uri: `${item.story_image}` }} />
+      </Card>
+        
+          }
+        keyExtractor={(item, index) => index.toString()}
+        removeClippedSubviews={true}
+        initialNumToRender={10}
+        />
+
       </View>
     </SafeAreaView>
   );
@@ -103,7 +122,7 @@ const styles = StyleSheet.create({
   screenName:{
     padding:6,
     fontFamily: "SourceSansPro_400Regular", 
-    fontSize:28,
+    fontSize:21,
     fontWeight: "bold",
   }
 });

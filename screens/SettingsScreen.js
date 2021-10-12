@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   screenTitle: {
     color: colors.black,
     fontFamily: 'SourceSansPro_400Regular',
-    fontSize: 25,
+    fontSize: 21,
     fontWeight: "bold",
     padding: 10,
     textAlign: "center"
