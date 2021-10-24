@@ -1,21 +1,26 @@
 import React, { useState, useEffect} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView, StatusBar, Platform, FlatList } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, Platform, FlatList, Image } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
 import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
+import { DMSerifText_400Regular } from '@expo-google-fonts/dm-serif-text';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Card, Title, Paragraph } from 'react-native-paper';
+import Carousel from 'react-native-snap-carousel';
+import { useWindowDimensions } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 
-function HomeScreen({}) {
+function HomeScreen({navigation}) {
 
   // const email = route.params;
   // const emailobj = route.params.email;
 
   const [story, setStory] = useState([]);
-  
+  const regex = /(<([^>]+)>)/ig; //Removing HTML tags from json response from story_body
+  const { height, width } = useWindowDimensions();
+
   useEffect(() =>{
     const getAllStories = async () => {
        try {
@@ -33,7 +38,51 @@ function HomeScreen({}) {
     getAllStories()
     },[]);
 
-    let [fontsLoaded] = useFonts({ SourceSansPro_400Regular });
+   const renderItem = ({item, index}) => {
+     const sid = item.sid;
+      return (
+        <Card style={styles.cardLayout}>
+        <Card.Content>
+          <Title style={styles.storyTitle}>{item.story_title}</Title>
+          <Image source={{ uri: `${item.story_image}` }} style={styles.storyImage} />
+          <Paragraph style={styles.storyBody} numberOfLines={8}>
+            {item.story_body.replace(regex, '')}
+          </Paragraph>
+          <Text style={styles.storyGenere}>#{item.genere_title}</Text>
+          <Text style={styles.saveButton}>Save</Text>
+          <TouchableRipple 
+            onPress={() => {
+              navigation.navigate('StoryScreen', {
+                sid: {sid},
+              });
+            }}
+            rippleColor="rgba(244, 246, 246, .32)">
+               <Text style={styles.buttonText}>Continue reading</Text>
+          </TouchableRipple>
+        </Card.Content>
+      </Card>
+
+      );
+  }
+
+    // var offset = 0;
+
+    // const onScroll = (event)=>{
+    //   var currentOffset = event.nativeEvent.contentOffset.y;
+    //       var direction = currentOffset > offset ? 'down' : 'up';
+    //   offset = currentOffset;
+    //   //console.log(direction);
+    //   if(direction == 'down'){
+    //     console.log("Direction is: " + direction);
+    //     //hide bottom tab on scroll down
+    //   }
+    //   if(direction == 'up'){
+    //     console.log("Direction is: " + direction);
+    //     //again show bottom tab on scroll up
+    //   }
+    // }
+
+    let [fontsLoaded] = useFonts({ SourceSansPro_400Regular, DMSerifText_400Regular });
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -43,35 +92,15 @@ function HomeScreen({}) {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
         <Text style={styles.screenName}>Home</Text>
-        {/* {!!story && story.map((item, sid) => (
-        <View key={sid}>
-        
-        <Card>
-          <Card.Content>
-            <Title>{item.story_title}</Title>
-            </Card.Content>
-              <Card.Cover source={{ uri: `${item.story_image}` }} />
-        </Card>
-       
-        </View>
-        ))} */}
-        {/* <Text>{story.length > 0 && story}</Text> */}
-
-        <FlatList
-        data={ story }
-        renderItem={({item}) => 
-        
-        <Card>
-        <Card.Content>
-          <Title>{item.story_title}</Title>
-          </Card.Content>
-            <Card.Cover source={{ uri: `${item.story_image}` }} />
-      </Card>
-        
-          }
-        keyExtractor={(item, index) => index.toString()}
-        removeClippedSubviews={true}
-        initialNumToRender={10}
+      
+        <Carousel
+              data={story}
+              renderItem={renderItem}
+              sliderWidth={width}
+              sliderHeight={height}
+              itemHeight={height}
+              itemWidth={width}
+              vertical={true}
         />
 
       </View>
@@ -123,7 +152,46 @@ const styles = StyleSheet.create({
     padding:6,
     fontFamily: "SourceSansPro_400Regular", 
     fontSize:21,
-    fontWeight: "bold",
+    fontWeight: "normal",
+  },
+  cardLayout: {
+    padding: 10,
+    marginLeft: "2%",
+    // borderRadius: 10,
+    width: "96%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: "70%",
+    // borderWidth:0.4,
+    // overflow: 'hidden',
+    // shadowRadius: 10,
+    // shadowOpacity: 0.5,
+    // backgroundColor: colors.lightpink
+
+  },
+  storyTitle: {
+    textAlign: "center",
+    fontWeight:"normal",
+    fontSize: 25,
+    fontFamily: 'DMSerifText_400Regular',
+  },
+  storyBody: {
+    marginTop: "5%",
+    fontSize: 16,
+    fontFamily: "SourceSansPro_400Regular", 
+  },
+  storyGenere: {
+    marginTop: "8%",
+    fontSize: 16,
+    fontFamily: "SourceSansPro_400Regular", 
+    padding: 8,
+    borderRadius: 12,
+    color: colors.blue,
+  },
+  storyImage: {
+    width: "97%",
+    height: "35%",
+    borderRadius: 10,
   }
 });
 

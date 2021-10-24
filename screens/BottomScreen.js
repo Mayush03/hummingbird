@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import { SafeAreaView, StatusBar, Platform } from 'react-native';
+import { SafeAreaView, StatusBar, Platform, Animated } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Righteous_400Regular } from '@expo-google-fonts/righteous';
@@ -41,6 +41,22 @@ function BottomScreen({ route }) {
     };
     getUserData()
     }, [emailobj]);
+    
+    var offset = 0;
+    const onScroll = (event)=>{
+      var currentOffset = event.nativeEvent.contentOffset.y;
+          var direction = currentOffset > offset ? 'down' : 'up';
+      offset = currentOffset;
+      //console.log(direction);
+      if(direction == 'down'){
+        console.log("Direction is: " + direction);
+        //hide bottom tab on scroll down
+      }
+      if(direction == 'up'){
+        console.log("Direction is: " + direction);
+        //again show bottom tab on scroll up
+      }
+    }
 
   let [fontsLoaded] = useFonts({ Righteous_400Regular });
 
@@ -48,9 +64,10 @@ function BottomScreen({ route }) {
     return <AppLoading />;
   } else {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} 
+    onScrollBeginDrag = {()=> onScroll()}
+    >
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
-
       <View style={styles.mainContainer}>
       <Tab.Navigator 
        initialRouteName="Home"
@@ -59,7 +76,7 @@ function BottomScreen({ route }) {
          headerShown: false,
          tabBarStyle: {
            position: 'absolute',
-           bottom: 30,
+           bottom: 10,
            left: 20,
            right: 20,
            elevation: 0,
@@ -67,8 +84,8 @@ function BottomScreen({ route }) {
            borderWidth: 1,
            borderColor: colors.black,
            borderRadius: 16,
-           minHeight: 66,
-           maxHeight: 66,
+           minHeight: 65,
+           maxHeight: 65,
            ...styles.shadow
          }
        }}
@@ -198,7 +215,6 @@ function BottomScreen({ route }) {
 
       </Tab.Navigator>
       </View>
-      
     </SafeAreaView>
   );
   }

@@ -15,5 +15,7 @@ export default {
     blackdisable: "rgb(105,105,105)",
     brightred: "#E74C3C",
     lightred: "#F9EBEA",
-    orange: "#F35431"
+    orange: "#F35431",
+    green: "#48C9B0",
+    lightpink: "#F2E8D9",
 }
