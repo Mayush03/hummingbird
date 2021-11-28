@@ -54,7 +54,7 @@ export function PasscodeScreen({ navigation, route }) {
 
   useEffect(()=>{
     const authenticate = async()=>{
-     axios.post(`http://192.168.1.7/hummingbird/verifypasscode.php?email=${emailobj}`, JSON.stringify({
+     axios.post(`http://192.168.1.10/hummingbird/verifypasscode.php?email=${emailobj}`, JSON.stringify({
         passcode: passcode,  
         email: emailobj,
      })).then((response)=>{

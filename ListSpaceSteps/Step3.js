@@ -1,24 +1,20 @@
 import React, { useState, useEffect} from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView, StatusBar, Platform, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
 import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
 import { DMSerifText_400Regular } from '@expo-google-fonts/dm-serif-text';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Carousel from 'react-native-snap-carousel';
 import { useWindowDimensions } from 'react-native';
-import { TouchableRipple } from 'react-native-paper';
-import { FAB } from 'react-native-paper';
 
-function HomeScreen({navigation}) {
+function Step3() {
 
   // const email = route.params;
   // const emailobj = route.params.email;
 
   const [story, setStory] = useState([]);
-  const regex = /(<([^>]+)>)/ig; //Removing HTML tags from json response from story_body
   const { height, width } = useWindowDimensions();
 
   useEffect(() =>{
@@ -28,11 +24,11 @@ function HomeScreen({navigation}) {
         const tokenData = await AsyncStorage.getItem('cookie')
         const response = await axios(`http://192.168.1.10/hummingbird/allStories.php`);
         setStory(response.data);
-        console.log("HomeScreen response data: ")
+        console.log("Step3 screen response data: ")
         console.log(response.data)
        }catch(err){
          
-       console.log("HomeScreen Err: " + err);
+       console.log("Step3 Err: " + err);
        }
     };
     getAllStories()
@@ -47,16 +43,7 @@ function HomeScreen({navigation}) {
     <SafeAreaView style={styles.container}>
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
-        <Text style={styles.screenName}>Home</Text>
-
-      {/* Floating button */}  
-        <FAB
-          style={styles.fab}
-          large
-          icon="plus"
-          color={colors.white}
-          onPress={() => navigation.navigate("AddSpace")}
-        />
+        <Text style={styles.screenName}>Step3 screen</Text>
 
       </View>
     </SafeAreaView>
@@ -112,17 +99,10 @@ const styles = StyleSheet.create({
   cardLayout: {
     padding: 10,
     marginLeft: "2%",
-    // borderRadius: 10,
     width: "96%",
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: "70%",
-    // borderWidth:0.4,
-    // overflow: 'hidden',
-    // shadowRadius: 10,
-    // shadowOpacity: 0.5,
-    // backgroundColor: colors.lightpink
-
   },
   storyTitle: {
     textAlign: "center",
@@ -156,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Step3;

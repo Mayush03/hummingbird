@@ -20,4 +20,8 @@ target 'hummingbird' do
   # end
   pod 'react-native-restart', :path => '../node_modules/react-native-restart'
 
+  pod 'react-native-tesseract-ocr', :path => '../node_modules/react-native-tesseract-ocr'
+
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
 end

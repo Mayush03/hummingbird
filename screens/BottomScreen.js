@@ -10,10 +10,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 /* Bottom Tab screens */
 import HomeScreen from './HomeScreen';
-import ProfileScreen from './ProfileScreen';
 import SearchScreen from './SearchScreen';
 import ShelfScreen from './ShelfScreen';
 import SettingsScreen from './SettingsScreen';
+import MessageScreen from './MessageScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +30,7 @@ function BottomScreen({ route }) {
         const token = await AsyncStorage.setItem('cookie', emailobj)
         const tokenData = await AsyncStorage.getItem('cookie')
         //console.log("BottomScreen tokenData: " + tokenData) 
-        const response = await axios(`http://192.168.1.7/hummingbird/bottomScreen.php?email=${emailobj}`);
+        const response = await axios(`http://192.168.1.9/hummingbird/bottomScreen.php?email=${emailobj}`);
         setModel(response.data);
         // console.log("BottomScreen response data: ")
         // console.log(response.data)
@@ -139,17 +139,16 @@ function BottomScreen({ route }) {
           ),
         }}   />
 
-
      <Tab.Screen name="Shelf" component={ShelfScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{position: 'absolute', top: 14, left:11, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{position: 'absolute', top: 7.5, left:8, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
               <Image 
               source={require("../assets/app_images/shelf.png")}
               resizeMode="contain"
               style={{
-                width:35,
-                height:35,
+                width:50,
+                height:50,
                 position: 'absolute', 
                 top: 0, 
                 left: 0, 
@@ -157,7 +156,7 @@ function BottomScreen({ route }) {
                 bottom: 0, 
                 justifyContent: 'center', 
                 alignItems: 'center',
-                tintColor: focused ? colors.orange : colors.blackdisable
+                tintColor: focused ? colors.red : colors.blackdisable
               }}
               />
             </View>
@@ -165,12 +164,12 @@ function BottomScreen({ route }) {
         }}   />
 
 
-         <Tab.Screen name="Profile" component={ProfileScreen}
+         <Tab.Screen name="Message" component={MessageScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{position: 'absolute', top: 19, left:19, right: 0, bottom: 10, justifyContent: 'center', alignItems: 'center'}}>
               <Image 
-              source={require("../assets/app_images/profile.png")}
+              source={require("../assets/app_images/chat.png")}
               resizeMode="contain"
               style={{
                 width:27,

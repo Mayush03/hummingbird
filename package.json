@@ -22,13 +22,17 @@
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.8.1",
+    "formik": "^2.2.9",
     "radio-buttons-react-native": "^1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^7.20.3",
     "react-mysql": "^0.0.1",
     "react-native": "~0.63.4",
     "react-native-awesome-alerts": "^1.5.2",
+    "react-native-flexi-radio-button": "^0.2.2",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-multi-steps": "^0.1.4",
     "react-native-otp-inputs": "^7.0.3",
     "react-native-paper": "^4.9.2",
     "react-native-reanimated": "~2.2.0",
@@ -36,7 +40,8 @@
     "react-native-screens": "~3.4.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-unimodules": "~0.14.5",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "react-native-wizard": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

@@ -75,7 +75,7 @@ export function SignupScreen({ navigation }) {
 
   useEffect(()=>{
     const authenticate = async()=>{
-     axios.post("http://192.168.1.7/hummingbird/registerUser.php", JSON.stringify({
+     axios.post("http://192.168.1.9/hummingbird/registerUser.php", JSON.stringify({
         fullname: fullname,  
         email: email,
      })).then((response)=>{

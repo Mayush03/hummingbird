@@ -13,7 +13,8 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ShelfScreen from '../screens/ShelfScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import ReadStoryScreen from '../screens/ReadStoryScreen';
+import MessageScreen from '../screens/MessageScreen';
+import AddSpaceScreen from '../screens/AddSpaceScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,8 @@ function AppNavigator() {
           <Stack.Screen options={{headerShown: false}} name="Shelf" component={ShelfScreen} />
           <Stack.Screen options={{headerShown: false}} name="Settings" component={SettingsScreen} />
           <Stack.Screen options={{headerShown: false}} name="BottomScreen" component={BottomScreen} />
-          <Stack.Screen options={{headerShown: false}} name="StoryScreen" component={ReadStoryScreen} />
+          <Stack.Screen options={{headerShown: false}} name="Message" component={MessageScreen} />
+          <Stack.Screen options={{headerShown: false}} name="AddSpace" component={AddSpaceScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );

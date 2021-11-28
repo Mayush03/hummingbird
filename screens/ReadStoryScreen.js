@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView, StatusBar, Platform, FlatList, Image, ScrollView } from 'react-native';
+import { SafeAreaView, StatusBar, Platform, Image } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
 import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sans-pro';
@@ -10,12 +10,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Title, Paragraph } from 'react-native-paper';
 import { useWindowDimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';  
 
 function StoryScreen({navigation, route}) {
 
   const [story, setStory] = useState([]);
-  const regex = /(<([^>]+)>)/ig; //Removing HTML tags from json response from story_body
+  //const regex = /(<([^>]+)>)/ig; //Removing HTML tags from json response from story_body
   const { height, width } = useWindowDimensions();
 
   const sid = route.params.sid.sid;
@@ -25,7 +25,7 @@ function StoryScreen({navigation, route}) {
        try {
         //Saving cookies...
         const tokenData = await AsyncStorage.getItem('cookie')
-        const response = await axios(`http://192.168.1.7/hummingbird/readStory.php?sid=${sid}`);
+        const response = await axios(`http://192.168.1.9/hummingbird/readStory.php?sid=${sid}`);
         setStory(response.data);
         console.log("StoryScreen response data: ")
         console.log(response.data)
@@ -47,7 +47,7 @@ function StoryScreen({navigation, route}) {
    <View style={styles.mainContainer}>
    <TouchableOpacity style={styles.actionsButton} 
         onPress={() => navigation.goBack()} activeOpacity={.6}>
-          <Ionicons name="chevron-back-sharp" size={30} color="black" />
+          <Ionicons name="arrow-back" size={30} color="black" />
         </TouchableOpacity>
      {/* <FlatList
      data={ story }
@@ -64,9 +64,9 @@ function StoryScreen({navigation, route}) {
      {!!story && story.map((item, sid) => (
         <View key={sid}>
           <View style={styles.cardLayout}>
-            <Image source={{ uri: `${item.story_image}` }} style={styles.storyImage} />
+            {/* <Image source={{ uri: `${item.story_image}` }} style={styles.storyImage} /> */}
             <Title style={styles.storyTitle}>{item.story_title}</Title>
-            <Paragraph>{item.story_body.replace(regex, '')}</Paragraph>
+            <Paragraph>{item.story_body}</Paragraph>
             </View>
 
         </View>
@@ -162,6 +162,9 @@ const styles = StyleSheet.create({
   buttonIcon: {
     paddingTop: 10,
     marginRight: 9,
+   },
+   actionsButton: {
+     padding: 10,
    }
 });
 

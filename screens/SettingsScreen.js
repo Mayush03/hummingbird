@@ -10,7 +10,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
-
 function SettingsScreen({ navigation, route }) {
 
   //Switch notification
@@ -50,7 +49,7 @@ const Logout = async() => {
     const getUserData = async () => {
        try {
         const tokenData = await AsyncStorage.getItem('cookie') 
-        const response = await axios(`http://192.168.1.7/hummingbird/homeScreen.php?email=${tokenData}`);
+        const response = await axios(`http://192.168.1.9/hummingbird/homeScreen.php?email=${tokenData}`);
         setModel(response.data);
         console.log(response.data)
        }catch(err){
@@ -135,11 +134,11 @@ const Logout = async() => {
         </TouchableOpacity>
 
         </View>
-
+        
         <AwesomeAlert
     show={showAlert}
     showProgress={false}
-    title="⚠️"
+    title="😔"
     titleStyle={{fontSize: 25}}
     message="Do you want to logout?"
     messageStyle={{fontFamily: "SourceSansPro_400Regular", fontSize: 18, color: colors.black}}
