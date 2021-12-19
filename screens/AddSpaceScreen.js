@@ -19,6 +19,7 @@ import Step5 from '../ListSpaceSteps/Step5';
 import Step6 from '../ListSpaceSteps/Step6';
 import Step7 from '../ListSpaceSteps/Step7';
 import Step8 from '../ListSpaceSteps/Step8';
+import Step9 from '../ListSpaceSteps/Step9';
 
 function AddSpaceScreen({ navigation, route }) {
 
@@ -59,6 +60,9 @@ function AddSpaceScreen({ navigation, route }) {
     },
     {
       content: <Step8 />
+    },
+    {
+      content: <Step9 />
     },
   ]
 

@@ -57,7 +57,7 @@ function RecorderScreen() {
         (data)=> {
         console.log(data)
         //  navigation.goBack({video: data.uri});
-         navigation.navigate("Step8", {
+         navigation.navigate("Step9", {
            video: data.uri,
          })
         }).catch(
