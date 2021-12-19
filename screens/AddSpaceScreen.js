@@ -8,17 +8,27 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IconButton } from 'react-native-paper';
 import Wizard from "react-native-wizard";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 // Wizard step components
 import Step1 from "../ListSpaceSteps/Step1";
 import Step2 from "../ListSpaceSteps/Step2";
 import Step3 from "../ListSpaceSteps/Step3";
+import Step4 from '../ListSpaceSteps/Step4';
+import Step5 from '../ListSpaceSteps/Step5';
+import Step6 from '../ListSpaceSteps/Step6';
+import Step7 from '../ListSpaceSteps/Step7';
+import Step8 from '../ListSpaceSteps/Step8';
 
 function AddSpaceScreen({ navigation, route }) {
 
   //const email = route.params;
   //const emailobj = route.params.email;
   const [model, setModel] = useState({});
+
+  //Form data handeling
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
   
   //Wizard setup
   const wizard = useRef()
@@ -34,6 +44,21 @@ function AddSpaceScreen({ navigation, route }) {
     },
     {
       content: <Step3 />
+    },
+    {
+      content: <Step4 />
+    },
+    {
+      content: <Step5 />
+    },
+    {
+      content: <Step6 />
+    },
+    {
+      content: <Step7 />
+    },
+    {
+      content: <Step8 />
     },
   ]
 
@@ -95,6 +120,9 @@ function AddSpaceScreen({ navigation, route }) {
         <Wizard
           ref={wizard}
           steps={stepList}
+          // nextStepAnimation="slideUp"
+          // prevStepAnimation="slideDown"
+          useNativeDriver={false}
           isFirstStep={val => setIsFirstStep(val)}
           isLastStep={val => setIsLastStep(val)}
           onNext={() => {
@@ -107,20 +135,20 @@ function AddSpaceScreen({ navigation, route }) {
             setCurrentStep(currentStep)
           }}
         />
-        {/* <View style={{ flexDirection: "row", margin: 18 }}>
+        <View style={{ flexDirection: "row", margin: 5 }}>
           {stepList.map((val, index) => (
             <View
               key={"step-indicator-" + index}
               style={{
-                width: 10,
-                marginHorizontal: 6,
-                height: 10,
-                borderRadius: 5,
-                backgroundColor: index === currentStep ? "#fc0" : "#000",
+                width: 20,
+                marginHorizontal: 4,
+                height: 4,
+                borderRadius: 10,
+                backgroundColor: index === currentStep ? "#B2BABB" : "#E5E8E8",
               }}
             />
           ))}
-        </View> */}
+        </View>
       </View>
 
       </View>
@@ -160,18 +188,6 @@ const styles = StyleSheet.create({
     maxHeight: '100%',
     backgroundColor: colors.white
   },
-  appLogo: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,
-    height: 50,
-  },
-  logotext: {
-    color: colors.orange,
-    fontFamily: 'Righteous_400Regular',
-    fontSize: 25,
-    textAlign: "center"
-  },
   buttonContainer: {
     flex: 1,
     width: 100,
@@ -206,8 +222,7 @@ const styles = StyleSheet.create({
     marginTop: "20%",
     position: "absolute",
     flexDirection: 'column',
-    textAlign: "center",
-    backgroundColor: colors.blue,
+    backgroundColor: colors.white,
   },
   formDataHeader: {
     fontWeight: "bold",

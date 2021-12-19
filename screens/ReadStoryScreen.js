@@ -25,7 +25,7 @@ function StoryScreen({navigation, route}) {
        try {
         //Saving cookies...
         const tokenData = await AsyncStorage.getItem('cookie')
-        const response = await axios(`http://192.168.1.9/hummingbird/readStory.php?sid=${sid}`);
+        const response = await axios(`http://192.168.1.10/hummingbird/readStory.php?sid=${sid}`);
         setStory(response.data);
         console.log("StoryScreen response data: ")
         console.log(response.data)

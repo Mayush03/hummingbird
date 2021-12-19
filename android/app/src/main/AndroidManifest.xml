@@ -7,6 +7,15 @@
   <!-- These require runtime permissions on M -->
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <!-- These require to track user currect geo-location -->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <!-- These require for camera permission & video recording-->
+  <uses-permission android:name="android.permission.CAMERA"/>
+  <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+  <!-- These require for external storage of image picker-->
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <!-- END OPTIONAL PERMISSIONS -->
   <application
     android:name=".MainApplication"
@@ -19,6 +28,7 @@
   >
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="YOUR-APP-URL-HERE"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>
+    <meta-data  android:name="com.google.android.geo.AIzaSyD0m-rDT-EB8nuU4tjb9BFjaB_KQ8RfSDw"  android:value="AIzaSyD0m-rDT-EB8nuU4tjb9BFjaB_KQ8RfSDw"/>  
     <activity
       android:name=".MainActivity"
       android:label="@string/app_name"

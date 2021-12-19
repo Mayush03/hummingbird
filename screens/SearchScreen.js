@@ -16,7 +16,7 @@ function SearchScreen({ route }) {
   useEffect(() =>{
     const getUserData = async () => {
        try {
-        const response = await axios(`http://192.168.1.9/hummingbird/homeScreen.php?email=${emailobj}`);
+        const response = await axios(`http://192.168.1.10/hummingbird/homeScreen.php?email=${emailobj}`);
         setModel(response.data);
         console.log(response.data)
         const token = await AsyncStorage.setItem('cookie', emailobj)

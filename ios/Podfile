@@ -24,4 +24,6 @@ target 'hummingbird' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'react-native-image-sequence', :path => '../node_modules/react-native-image-sequence'
+
 end

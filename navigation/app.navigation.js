@@ -15,6 +15,8 @@ import ShelfScreen from '../screens/ShelfScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import MessageScreen from '../screens/MessageScreen';
 import AddSpaceScreen from '../screens/AddSpaceScreen';
+import RecorderScreen from '../screens/RecorderScreen';
+import Step8 from '../ListSpaceSteps/Step8';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,8 @@ function AppNavigator() {
           <Stack.Screen options={{headerShown: false}} name="BottomScreen" component={BottomScreen} />
           <Stack.Screen options={{headerShown: false}} name="Message" component={MessageScreen} />
           <Stack.Screen options={{headerShown: false}} name="AddSpace" component={AddSpaceScreen} />
+          <Stack.Screen options={{headerShown: false}} name="Recorder" component={RecorderScreen} />
+          <Stack.Screen options={{headerShown: false}} name="Step8" component={Step8} />
         </Stack.Navigator>
       </NavigationContainer>
     );

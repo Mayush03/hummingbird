@@ -30,7 +30,7 @@ function BottomScreen({ route }) {
         const token = await AsyncStorage.setItem('cookie', emailobj)
         const tokenData = await AsyncStorage.getItem('cookie')
         //console.log("BottomScreen tokenData: " + tokenData) 
-        const response = await axios(`http://192.168.1.9/hummingbird/bottomScreen.php?email=${emailobj}`);
+        const response = await axios(`http://192.168.1.10/hummingbird/bottomScreen.php?email=${emailobj}`);
         setModel(response.data);
         // console.log("BottomScreen response data: ")
         // console.log(response.data)

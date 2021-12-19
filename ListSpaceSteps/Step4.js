@@ -8,20 +8,22 @@ import { DMSerifText_400Regular } from '@expo-google-fonts/dm-serif-text';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useWindowDimensions } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
+import { Checkbox } from 'react-native-paper';
 
-function Step1() {
+function Step4() {
 
   // const email = route.params;
   // const emailobj = route.params.email;
 
   const [story, setStory] = useState([]);
-  const { height, width } = useWindowDimensions();
-
-  const accommodation = ["Shared Apartment", "Independent House", "PG House", "Hostel"];
-  const gender = ["Female", "Male", "Either will work", "Others"];
-  const alcohol = ["I am comfortable", "Not allowed"];
-
+  const [geyser, setGeyser] = useState(false);
+  const [internet, setInternet] = useState(false);
+  const [maid, setMaid] = useState(false);
+  const [parking, setParking] = useState(false);
+  const [lift, setLift] = useState(false);
+  const [electricity, setElectricity] = useState(false);
+  const [airconditioner, setAirconditioner] = useState(false);
+ 
   useEffect(() =>{
     const getAllStories = async () => {
        try {
@@ -48,75 +50,56 @@ function Step1() {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
       <Text style={styles.screenNameHeader}>
-        Let's start with basic set of questions to understand your requirements...
+        Select the amenities that are already avaialble at your place...
         </Text>
-        {/* First set of question */}
-        <Text style={styles.screenName}>Select type of accommodation</Text>
-        <Text style={styles.screenNameMeta}>Select the most suitable type of accommodation for your next tenants</Text>
-        <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={accommodation}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
-        />
-        </View>
         
-        {/* Second set of question */}
-        <Text style={styles.screenName}>Select type of tenants</Text>
-        <Text style={styles.screenNameMeta}>
-          Select tenants gender, who will share the space with you
-          </Text>
+        {/* Sixth set of question */}
+        <Text style={styles.screenName}>Select pre-owned amenities</Text>
         <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={gender}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
-        />
+          
+        <Checkbox.Item label="Geyser" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={geyser ? 'checked' : 'unchecked'}
+           onPress={() => { setGeyser(!geyser); }}/>
+
+        <Checkbox.Item label="Wifi-Internet" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={internet ? 'checked' : 'unchecked'}
+           onPress={() => { setInternet(!internet); }}/>
+
+        <Checkbox.Item label="Maid / Cook" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={maid ? 'checked' : 'unchecked'}
+           onPress={() => { setMaid(!maid); }}/>
+
+        <Checkbox.Item label="Parking space" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={parking ? 'checked' : 'unchecked'}
+           onPress={() => { setParking(!parking); }}/>
+
+        <Checkbox.Item label="Lift elevator" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={lift ? 'checked' : 'unchecked'}
+           onPress={() => { setLift(!lift); }}/>
+
+        <Checkbox.Item label="Electricity backup" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={electricity ? 'checked' : 'unchecked'}
+           onPress={() => { setElectricity(!electricity); }}/>
+
+          <Checkbox.Item label="Air conditioner" position="leading" 
+          //  color={colors.orange}
+           labelStyle={{textAlign: "left"}}
+           status={airconditioner ? 'checked' : 'unchecked'}
+           onPress={() => { setAirconditioner(!airconditioner); }}/>
+
         </View>
-
-        {/* Third set of question */}
-        {/* <Text style={styles.screenName}>Smoking & Alchol comsumpitions</Text>
-        <Text style={styles.screenNameMeta}>
-          Select the most suitable option, either you or your tenants are comfortable sharing drinks, smokes
-          </Text>
-        <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={alcohol}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
-        />
-        </View> */}
-
         
       </View>
     </SafeAreaView>
@@ -180,7 +163,9 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
   },
   SelectDropdownContainer: {
-   padding: 20,
+   padding: 0,
+   marginTop: 10,
+   flexDirection: "column",
    width: "100%",
    borderBottomColor: colors.lightgray,
     borderBottomWidth: 1,
@@ -200,4 +185,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Step1;
+export default Step4;

@@ -18,4 +18,5 @@ export default {
     orange: "#F35431",
     green: "#48C9B0",
     lightpink: "#F2E8D9",
+    grayblack: "#616A6B"
 }

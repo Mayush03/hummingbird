@@ -16,7 +16,7 @@ function ProfileScreen({}) {
        try {
         //Saving cookies...
         const tokenData = await AsyncStorage.getItem('cookie')
-        const response = await axios(`http://192.168.1.9/hummingbird/homeScreen.php?email=${tokenData}`);
+        const response = await axios(`http://192.168.1.10/hummingbird/homeScreen.php?email=${tokenData}`);
         setModel(response.data);
         console.log("ProfileScreen response data: ")
         console.log(response.data)

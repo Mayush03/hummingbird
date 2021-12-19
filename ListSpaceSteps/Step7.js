@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component} from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
@@ -8,19 +8,15 @@ import { DMSerifText_400Regular } from '@expo-google-fonts/dm-serif-text';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useWindowDimensions } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
 
-function Step3() {
+function Step7() {
 
   // const email = route.params;
   // const emailobj = route.params.email;
 
   const [story, setStory] = useState([]);
+  const [pincode, onChangePincode] = useState([]);
   const { height, width } = useWindowDimensions();
-
-  const nearby = ["Available within 5 Kms", "Available within 10 Kms", "Available within 20 Kms", "Available within 50 Kms"];
-
-  const metro = ["Available within 5 Kms", "Available within 10 Kms", "Available within 20 Kms", "No metro in our city"];
 
   useEffect(() =>{
     const getAllStories = async () => {
@@ -29,14 +25,30 @@ function Step3() {
         const tokenData = await AsyncStorage.getItem('cookie')
         const response = await axios(`http://192.168.1.10/hummingbird/allStories.php`);
         setStory(response.data);
-        console.log("Step1 screen response data: ")
+        console.log("Step7 screen response data: ")
         console.log(response.data)
        }catch(err){
-       console.log("Step1 Err: " + err);
+       console.log("Step7 Err: " + err);
        }
     };
     getAllStories()
     },[]);
+
+    useEffect(() =>{
+      const getPostalCodeDetails = async () => {
+         try {
+          //Saving cookies...
+          const tokenData = await AsyncStorage.getItem('cookie')
+          const response = await axios(`http://www.postalpincode.in/api/pincode/${pincode}`);
+          setStory(response.data);
+          console.log("Step7 screen response data: ")
+          console.log(response.data)
+         }catch(err){
+         console.log("Step7 Err: " + err);
+         }
+      };
+      getPostalCodeDetails()
+      },[]);
 
     let [fontsLoaded] = useFonts({ SourceSansPro_400Regular, DMSerifText_400Regular });
 
@@ -48,56 +60,19 @@ function Step3() {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
       <Text style={styles.screenNameHeader}>
-        Select nearby places from your accommodation...
+        Enter pincode to get your location details.
         </Text>
         
-        {/* Fourth set of question */}
-        <Text style={styles.screenName}>Markets & Hospitals</Text>
-        <Text style={styles.screenNameMeta}>
-          Select the most nearby location of Market and Hospital
-          </Text>
+        {/* Pincode location of home */}
         <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={nearby}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
+        <TextInput onChangeText={onChangePincode} placeholder="Enter pincode of your space" 
+                   keyboardType="number-pad" 
+                   maxLength={6}
+                   style={styles.textInput}
+  
         />
         </View>
 
-        {/* Fifth set of question */}
-        <Text style={styles.screenName}>Metro stations</Text>
-        <Text style={styles.screenNameMeta}>
-          Select the most nearby location of Metro station
-          </Text>
-        <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={metro}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
-        />
-        </View>
-
-        
       </View>
     </SafeAreaView>
   );
@@ -150,34 +125,21 @@ const styles = StyleSheet.create({
     color: colors.grayblack,
     maxWidth: "90%"
   },
-  radioButtonContainer: {
-    padding: 30,
-    marginTop: "25%",
-  },
-  radioGroupStyle: {
-    fontSize: 2,
-    color: colors.white,
-    // flexDirection: 'row',
-  },
   SelectDropdownContainer: {
    padding: 20,
    width: "100%",
-   borderBottomColor: colors.lightgray,
-    borderBottomWidth: 1,
   },
-  selectOption: {
-    marginTop: "0%",
-    textAlign: "center",
-    borderRadius: 5,
-    width: "95%",
-    fontFamily: "SourceSansPro_400Regular",
-  },
-  dropDownOption: {
-    position: "relative",
-    backgroundColor: colors.lightgray,
-    borderRadius: 5,
-    borderColor: colors.transparent,
-  }
+ textInput: {
+  borderRadius: 5,
+  padding: 10,
+  maxHeight: 200,
+  borderColor: colors.gray,
+  backgroundColor: colors.lightgray,
+  fontFamily: "SourceSansPro_400Regular", 
+  fontSize:17,
+  fontWeight: "normal",
+  color: colors.black
+ }
 });
 
-export default Step3;
+export default Step7;

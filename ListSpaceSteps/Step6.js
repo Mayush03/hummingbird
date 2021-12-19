@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component} from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { SafeAreaView, StatusBar, Platform } from 'react-native';
 import colors from '../utility/colors';
 import AppLoading from 'expo-app-loading';
@@ -10,17 +10,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useWindowDimensions } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 
-function Step1() {
+function Step6() {
 
   // const email = route.params;
   // const emailobj = route.params.email;
 
   const [story, setStory] = useState([]);
+  const [text, onChangeText] = useState([]);
   const { height, width } = useWindowDimensions();
 
-  const accommodation = ["Shared Apartment", "Independent House", "PG House", "Hostel"];
-  const gender = ["Female", "Male", "Either will work", "Others"];
-  const alcohol = ["I am comfortable", "Not allowed"];
+  const restroom = ["Yes, we have to share ", "No, we will use seperate"];
 
   useEffect(() =>{
     const getAllStories = async () => {
@@ -48,37 +47,28 @@ function Step1() {
        <StatusBar style={styles.statusBar} backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.mainContainer}>
       <Text style={styles.screenNameHeader}>
-        Let's start with basic set of questions to understand your requirements...
+        How many tenant can your place accomodate?
         </Text>
-        {/* First set of question */}
-        <Text style={styles.screenName}>Select type of accommodation</Text>
-        <Text style={styles.screenNameMeta}>Select the most suitable type of accommodation for your next tenants</Text>
-        <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={accommodation}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
-        />
-        </View>
         
-        {/* Second set of question */}
-        <Text style={styles.screenName}>Select type of tenants</Text>
+        {/* Eigth set of question */}
+        <Text style={styles.screenName}>Add appropriate number</Text>
+        <View style={styles.SelectDropdownContainer}>
+        <TextInput onChangeText={onChangeText} placeholder="Enter number" 
+                   keyboardType="number-pad" 
+                   maxLength={2}
+                   style={styles.textInput}
+  
+        />
+        </View>
+
+        {/* Ninth set of question */}
+        <Text style={styles.screenName}>Restroom & Bathroom</Text>
         <Text style={styles.screenNameMeta}>
-          Select tenants gender, who will share the space with you
+          Do you have to share the restroom and baathroom with other tenants?
           </Text>
         <View style={styles.SelectDropdownContainer}>
         <SelectDropdown
-	         data={gender}
+	         data={restroom}
            defaultButtonText="Select one"
            buttonStyle={styles.selectOption}
            dropdownStyle={styles.dropDownOption}
@@ -93,30 +83,6 @@ function Step1() {
 	         }}
         />
         </View>
-
-        {/* Third set of question */}
-        {/* <Text style={styles.screenName}>Smoking & Alchol comsumpitions</Text>
-        <Text style={styles.screenNameMeta}>
-          Select the most suitable option, either you or your tenants are comfortable sharing drinks, smokes
-          </Text>
-        <View style={styles.SelectDropdownContainer}>
-        <SelectDropdown
-	         data={alcohol}
-           defaultButtonText="Select one"
-           buttonStyle={styles.selectOption}
-           dropdownStyle={styles.dropDownOption}
-	         onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	         }}
-	         buttonTextAfterSelection={(selectedItem, index) => {
-		         return selectedItem
-	         }}
-	         rowTextForSelection={(item, index) => {
-		         return item
-	         }}
-        />
-        </View> */}
-
         
       </View>
     </SafeAreaView>
@@ -197,7 +163,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightgray,
     borderRadius: 5,
     borderColor: colors.transparent,
-  }
+  },
+  textInput: {
+    borderRadius: 5,
+    padding: 10,
+    maxHeight: 200,
+    borderColor: colors.gray,
+    backgroundColor: colors.lightgray,
+    fontFamily: "SourceSansPro_400Regular", 
+    fontSize:17,
+    fontWeight: "normal",
+    color: colors.black
+   }
 });
 
-export default Step1;
+export default Step6;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, StatusBar, Platform, FlatList, Image } from 'react-native';
 import colors from '../utility/colors';
@@ -7,7 +7,6 @@ import { useFonts, SourceSansPro_400Regular } from '@expo-google-fonts/source-sa
 import { DMSerifText_400Regular } from '@expo-google-fonts/dm-serif-text';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Carousel from 'react-native-snap-carousel';
 import { useWindowDimensions } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
 import { FAB } from 'react-native-paper';
@@ -18,7 +17,6 @@ function HomeScreen({navigation}) {
   // const emailobj = route.params.email;
 
   const [story, setStory] = useState([]);
-  const regex = /(<([^>]+)>)/ig; //Removing HTML tags from json response from story_body
   const { height, width } = useWindowDimensions();
 
   useEffect(() =>{
