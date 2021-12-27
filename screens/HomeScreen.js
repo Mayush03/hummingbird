@@ -53,7 +53,7 @@ function HomeScreen({navigation}) {
           large
           icon="plus"
           color={colors.white}
-          onPress={() => navigation.navigate("AddSpace")}
+          onPress={() => navigation.navigate("Step1")}
         />
 
       </View>
